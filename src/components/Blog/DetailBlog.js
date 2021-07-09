@@ -20,8 +20,7 @@ class DetailBlog extends Component{
             // const comment= res.data.data.comment;
             this.setState({
                 detail: res.data.data,
-                comment: res.data.data.comment,
-                
+                comment: res.data.data.comment
             });
             console.log({detail})
         })

@@ -40,7 +40,7 @@ class Header extends Component{
         // console.log(isLogin)
         if(JSON.parse(isLogin)){
           return(
-                <li><a onClick={e=>this.logout(e)}><i className="fa fa-lock" />logout</a></li>
+                <li><a onClick={e=>this.Submitlogout(e)}><i className="fa fa-lock" />logout</a></li>
           )
         }
         else{
@@ -50,7 +50,7 @@ class Header extends Component{
         }
         
     }
-    logout(e){
+    Submitlogout(e){
         //set lại cho isLogin thành false
         localStorage.setItem("isLogin",JSON.stringify(false))
         this.props.history.push('/login');
