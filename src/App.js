@@ -25,7 +25,9 @@ class App extends Component{
         <section>
           <div className="container">
             <div className="row">
-                
+                <div className="col-sm-3">
+                  <MenuLeft />
+                </div>
                 {this.props.children} 
                 {/* gọi tới các prop con từ component con */}
                 

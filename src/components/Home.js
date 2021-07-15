@@ -13,9 +13,6 @@ class Home extends Component{
             // <Slider />,
             <div className="container">
                 <div className="row">
-                    <div className="col-sm-3">
-                        <MenuLeft />
-                    </div>
                     <div className="col-sm-9">
                         <div className="col-md-8">
                             <div>

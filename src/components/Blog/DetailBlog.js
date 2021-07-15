@@ -1,20 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios'
-import { Link } from 'react-router-dom';
 import { Component } from 'react';
 import MenuLeft from '../Layout/MenuLeft_Blog';
+import Comment from '../Blog/Comment';
+import ListComment from '../Blog/ListComment';
+import { withRouter } from 'react-router-dom';
 
 class DetailBlog extends Component{
     constructor(props){
         super(props)
         this.state = {
-            detail: []
+            detail: [],
+            comment: [],
+            idReply: "",
         }
+        this.renderDetail = this.renderDetail.bind(this)
+        this.getComment = this.getComment.bind(this)
+        //id of comment
+        this.idSubComment = this.idSubComment.bind(this)
+        //id of reply cmt
+        this.reply = this.reply.bind(this)
     }
     componentDidMount(){
-        axios.get(`http://localhost:8080/laravel/public/api/blog/detail/` + this.props.match.params.id )
+        // get Id of param
+        const getId = this.props.match.params.id;
+        axios.get(`http://localhost:8080/laravel/public/api/blog/detail/` + getId )
         .then(res => {
             const detail = res.data.data; //goji ddungs dduowfng daax voo Api
             // const comment= res.data.data.comment;
@@ -26,12 +37,77 @@ class DetailBlog extends Component{
         })
         .catch(error => console.log(error))
     }
+    renderDetail(){
+            let { detail } = this.state;
+            if (Object.keys(detail).length > 0) {
+            // console.log(detail['image'])
+            return (
+                <div className="blog-post-area">
+                    <h2 className="title text-center">Latest From our Blog</h2>
+                    <div className="single-blog-post">
+                        <h3>{detail["title"]}</h3>
+                        <div className="post-meta">
+                            <ul>
+                                <li>
+                                    <i className="fa fa-user" /> Mac Doe
+                                </li>
+                                <li>
+                                    <i className="fa fa-clock-o" /> 1:33 pm
+                                </li>
+                                <li>
+                                    <i className="fa fa-calendar" /> DEC 5, 2013
+                                </li>
+                            </ul>
+                            <span>
+                                <i className="fa fa-star" />
+                                <i className="fa fa-star" />
+                                <i className="fa fa-star" />
+                                <i className="fa fa-star" />
+                                <i className="fa fa-star-half-o" />
+                            </span>
+                        </div>
+                        <a href>
+                            <img
+                                src={
+                                "http://localhost:8080/laravel/public/upload/Blog/image/" + detail["image"]}
+                                alt="" />
+                        </a>
+                        <p>{detail["description"]}</p>
+                        <div className="pager-area">
+                            <ul className="pager pull-right">
+                                <li>
+                                    <a href="#">Pre</a>
+                                </li>
+                                <li>
+                                    <a href="#">Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+    }
+    getComment(x) {
+        console.log("getComment(x) x: " + x);
+        this.setState({
+          comment: this.state.comment.concat(x),
+        });
+    }
+    reply(e) {
+        let idSubComment = e.target.id;
+        this.props.idSubComment(idSubComment);
+        console.log(idSubComment);
+    }
+    idSubComment(y){
+        this.setState({
+            idReply: y,
+        })
+        console.log("Id reply " + y)
+    }
+    
     render(){
         let {detail} = this.state;
-        
-        // lấy giữ liệu id từ path
-        const { id } = this.props.match.params.id 
-        console.log("id from path "+this.props.match.params.id)
         console.log("detail " + detail)
         //lấy giá trị 1 chiều        
         if(Object.keys(detail).length > 0){
@@ -40,38 +116,9 @@ class DetailBlog extends Component{
                return(
                     <div className="container">
                         <div className="row">
-                            <div className="col-sm-3">
-                                <MenuLeft />
-                            </div>
                             <div className="col-sm-9">
                                 <div className="blog-post-area">
-                                <h2 className="title text-center">Latest From our Blog</h2>
-                                        <div className="single-blog-post">
-                                            <h3>{detail['title']}</h3>
-                                        </div>
-                                        <div class="post-meta">
-                                                <ul>
-                                                    <li><i class="fa fa-user"></i> Mac Doe</li>
-                                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-                                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-                                                </ul>
-                                        </div>
-                                    <a>
-                                        <img src={"http://localhost:8080/laravel/public/upload/Blog/image/" + detail['image']} alt=""/>
-                                    </a>
-                                    <p>
-                                        {detail['description']}
-                                    </p>
-                                    <p>
-                                        {detail['content']}
-                                    </p>
-
-                                    <div class="pager-area">
-                                        <ul class="pager pull-right">
-                                            <li><a href="#">Pre</a></li>
-                                            <li><a href="#">Next</a></li>
-                                        </ul>		
-                                    </div>
+                                    {this.renderDetail()}
                                     {/* <!--/rating-area-->  */}
                                     <div class="rating-area">
                                         <ul class="ratings">
@@ -92,9 +139,21 @@ class DetailBlog extends Component{
                                             <li><a class="color" href="">Girls</a></li>
                                         </ul>
                                     </div>
+                                    {/* social network */}
                                     <div class="socials-share">
                                         <a href=""><img src="http://localhost:8080/laravel/public/frontend/images/blog/socials.png" alt="" /></a>
-                                    </div>   
+                                    </div>
+                                    <ListComment
+                                        getId={this.props.match.params.id}
+                                        comment={this.state.comment}
+                                        idSubComment={this.idSubComment}
+                                    />
+                                    {/* get Comment */}
+                                    <Comment 
+                                        getId = {this.props.match.params.id}
+                                        getComment = {this.getComment}
+                                        idSubComment= {this.idSubComment}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -108,4 +167,4 @@ class DetailBlog extends Component{
         
     }
 }
-export default DetailBlog
+export default withRouter(DetailBlog)

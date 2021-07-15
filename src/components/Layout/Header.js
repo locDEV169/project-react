@@ -12,7 +12,7 @@ import {
     withRouter
 } from "react-router-dom";
 class Header extends Component{
-      // renderLogin(){
+    // renderLogin(){
     //   - goi local ra de lay bien ma khi login xong tao ra 
     //   - kiem tra bien do co k?
     //     + co: 
@@ -30,7 +30,6 @@ class Header extends Component{
     // }
     constructor(props){
         super(props);
-        // this.logout = this.logout.bind(this)
     }
     
     
@@ -60,6 +59,10 @@ class Header extends Component{
     }
     renderAccount(){
         const isLogin = localStorage.getItem('isLogin')
+        console.log(isLogin + " JSON.parse(isLogin) :" + JSON.parse(isLogin));
+        // cách lấy islogin từ local
+        // là localStorage.getItem('isLogin')
+        // sau đó chuyển thành biến js để xử lý
         if(JSON.parse(isLogin)){
           return(
             <li><Link to="/account/member"><i className="fa fa-user" /> Account</Link></li>
@@ -68,7 +71,6 @@ class Header extends Component{
       }
     render(){
         return(
-            
             <div>
                 <header id="header">
                 {/* header header_top */}

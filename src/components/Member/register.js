@@ -32,51 +32,17 @@ class Resign extends Component{
                 msg: ''
             }
         this.handleUserInputFile = this.handleUserInputFile.bind(this);
-        this.handleChangeName = this.handleChangeName.bind(this);
-        this.handleChangeEmail = this.handleChangeEmail.bind(this);
-        this.handleChangePass = this.handleChangePass.bind(this);
-        this.handleChangePhone = this.handleChangePhone.bind(this);
-        this.handleChangeAddress = this.handleChangeAddress.bind(this);
-        this.handleChangeCountry= this.handleChangeCountry.bind(this);
-        this.handleChangeLevel= this.handleChangeLevel.bind(this);
+        this.handleValue = this.handleValue.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
-    //chuyển đổi dữ liệu
-    handleChangeName(e){
+    handleValue(e){ 
+        let nameInput = e.target.name;
+        let value = e.target.value;
         this.setState({
-                name: e.target.value
-            })
-    }
-    handleChangeEmail(e){
-        this.setState({
-                email: e.target.value
-            })
-    }
-    handleChangePass(e){
-        this.setState({
-                password: e.target.value
-            })
-    }
-    handleChangePhone(e){
-        this.setState({
-                phone: e.target.value
-            })
-    }
-    handleChangeAddress(e){
-        this.setState({
-                address: e.target.value
-            })
-    }
-    handleChangeCountry(e){
-        this.setState({
-                country: e.target.value
-            })
-    }
-    handleChangeLevel(e){
-        this.setState({
-                level: '0'
-            })
+            [nameInput]: value,
+        })
+        // console.log(value)
     }
     
     // handle dùng để up file image for User
@@ -190,7 +156,6 @@ class Resign extends Component{
                 level: 0,
                 country: this.state.country,
                 avatar: this.state.avatar,
-                
             }
             axios.post(`http://localhost:8080/laravel/public/api/register`,
             // this.state
@@ -279,27 +244,27 @@ class Resign extends Component{
                             <p> {this.state.msg} </p>
                             <form method="post" onSubmit={this.handleSubmit} encType="multipart/form-data">
                                 <input type="text" placeholder="Name" id="name" name="name"  
-                                    onChange={this.handleChangeName}
+                                    onChange={this.handleValue}
                                     value={this.state.name}    
                                     />
                                 <input type="email" placeholder="Email Address" id="email"  name="email" 
-                                    onChange={this.handleChangeEmail}
+                                    onChange={this.handleValue}
                                     value={this.state.email}
                                     />
                                 <input type="password" placeholder="Password" id="password" name="password" 
-                                    onChange={this.handleChangePass}
+                                    onChange={this.handleValue}
                                     value={this.state.password}
                                     />
                                 <input type="text" placeholder="Address" id="address" name="address" 
-                                    onChange={this.handleChangeAddress}
+                                    onChange={this.handleValue}
                                     value={this.state.address}
                                     />
                                 <input type="text" placeholder="Country" id="country" name="country" 
-                                    onChange={this.handleChangeCountry}
+                                    onChange={this.handleValue}
                                     value={this.state.country}
                                     />
                                 <input type="text" placeholder="+2 95 01 88 821" id="phone" name="phone" 
-                                    onChange={this.handleChangePhone}
+                                    onChange={this.handleValue}
                                     value={this.state.phone}
                                     />
                                 <div>
@@ -308,7 +273,6 @@ class Resign extends Component{
                                         // value={this.state.file}
                                     />
                                 </div>
-
                                 <button type="submit" class="btn btn-default">Signup</button>
                             </form>
                         </div>

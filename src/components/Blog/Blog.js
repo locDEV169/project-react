@@ -14,9 +14,6 @@ class Blog extends Component{
         return(
             <div className="container">
                 <div className="row">
-                    <div className="col-sm-3">
-                        <MenuLeft />
-                    </div>
                     <div className="col-sm-9">
                         <div className="blog-post-area">
                             <h2 className="title text-center">Latest From our Blog</h2>

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import MenuLeft from '../Layout/MenuLeft';
 import FormErrors from '../Error/formErrors';
 import axios from 'axios';
+import formErrors from '../Error/formErrors';
 
 class Login extends Component{
     constructor(props){
@@ -72,18 +73,24 @@ class Login extends Component{
             .then(res => {
                 console.log(res);
                 console.log(res.data);
-                if(res.data.error){
+                if(res.data.errors){
                     this.setState({
-                        formErrors: res.data.errors
+                        formErrors: res.data.errors,
                     })
+
                 }
                 else{
                     // login xong
                     // tao bien gi do va dua vao localStorage
                     // lấy mọi thông tin từ local ra bằng biến convert
+                    // chuyển dữ liệu thành file json đưa vào local
                     const convert = JSON.stringify(res.data);
                     localStorage.setItem("info", convert);
+                    const accessToken = res.data.success.token;
+                    console.log("accessToken " + accessToken)
+                    localStorage.setItem("token", accessToken)
                     // console.log(convert);
+                    // set cho islogin=true nếu login đúng
                     localStorage.setItem("isLogin",JSON.stringify(true))
                     this.setState({
                         // gọi messege trong console để in ra cho màn hình
@@ -104,7 +111,6 @@ class Login extends Component{
             {/* <!--form--> */}
                 <div className="container">
                         <div className="row justify-content-center">
-                            <MenuLeft />
                             {/* <!--login form--> */}
                             <div className="col-md-8">
                                 <div class="col-sm-7 padding-right">
