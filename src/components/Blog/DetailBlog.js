@@ -97,73 +97,65 @@ class DetailBlog extends Component{
     reply(e) {
         let idSubComment = e.target.id;
         this.props.idSubComment(idSubComment);
-        console.log(idSubComment);
+        // console.log(idSubComment);
     }
     idSubComment(y){
         this.setState({
             idReply: y,
         })
-        console.log("Id reply " + y)
     }
     
     render(){
         let {detail} = this.state;
         console.log("detail " + detail)
         //lấy giá trị 1 chiều        
-        if(Object.keys(detail).length > 0){
-                console.log("detail.length " + detail.length)
-                console.log("image" + detail['image'])
-               return(
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-sm-9">
-                                <div className="blog-post-area">
-                                    {this.renderDetail()}
-                                    {/* <!--/rating-area-->  */}
-                                    <div class="rating-area">
-                                        <ul class="ratings">
-                                            <li class="rate-this">Rate this item:</li>
-                                            <li>
-                                                <i class="fa fa-star color"></i>
-                                                <i class="fa fa-star color"></i>
-                                                <i class="fa fa-star color"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                            <li class="color">(6 votes)</li>
-                                        </ul>
-                                        <ul class="tag">
-                                            <li>TAG:</li>
-                                            <li><a class="color" href="">Pink <span>/</span></a></li>
-                                            <li><a class="color" href="">T-Shirt <span>/</span></a></li>
-                                            <li><a class="color" href="">Girls</a></li>
-                                        </ul>
-                                    </div>
-                                    {/* social network */}
-                                    <div class="socials-share">
-                                        <a href=""><img src="http://localhost:8080/laravel/public/frontend/images/blog/socials.png" alt="" /></a>
-                                    </div>
-                                    <ListComment
-                                        getId={this.props.match.params.id}
-                                        comment={this.state.comment}
-                                        idSubComment={this.idSubComment}
-                                    />
-                                    {/* get Comment */}
-                                    <Comment 
-                                        getId = {this.props.match.params.id}
-                                        getComment = {this.getComment}
-                                        idSubComment= {this.idSubComment}
-                                    />
-                                </div>
+        return(
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm-9">
+                        <div className="blog-post-area">
+                            {this.renderDetail()}
+                            {/* <!--/rating-area-->  */}
+                            <div class="rating-area">
+                                <ul class="ratings">
+                                    <li class="rate-this">Rate this item:</li>
+                                    <li>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </li>
+                                    <li class="color">(6 votes)</li>
+                                </ul>
+                                <ul class="tag">
+                                    <li>TAG:</li>
+                                    <li><a class="color" href="">Pink <span>/</span></a></li>
+                                    <li><a class="color" href="">T-Shirt <span>/</span></a></li>
+                                    <li><a class="color" href="">Girls</a></li>
+                                </ul>
                             </div>
+                            {/* social network */}
+                            <div class="socials-share">
+                                <a href=""><img src="http://localhost:8080/laravel/public/frontend/images/blog/socials.png" alt="" /></a>
+                            </div>
+                            <ListComment
+                                getId={this.props.match.params.id}
+                                comment={this.state.comment}
+                                idSubComment={this.idSubComment}
+                            />
+                            {/* get Comment */}
+                            <Comment 
+                                getId = {this.props.match.params.id}
+                                getComment = {this.getComment}
+                                idSubComment= {this.idSubComment}
+                            />
                         </div>
                     </div>
-                   
-               )
-        }
-        else{
-            return ''
-        }
+                </div>
+            </div>
+           
+       )
         
     }
 }

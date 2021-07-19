@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import FormErrors from '../Error/formErrors';
-import { BrowserRouter } from 'react-router-dom';
 //import router-dom
 import {
     BrowserRouter as Router,
@@ -13,6 +12,9 @@ import {
     useParams,Redirect
 } from "react-router-dom";
 
+const SucecssStyle = {
+    color:'greenyellow'
+}
 
 class Resign extends Component{
     constructor(props){
@@ -241,7 +243,7 @@ class Resign extends Component{
                         <FormErrors formErrors={this.state.formErrors}/>
                         <div className="signup-form">
                             <h2>New User Signup!</h2>
-                            <p> {this.state.msg} </p>
+                            <p style={SucecssStyle}> {this.state.msg} </p>
                             <form method="post" onSubmit={this.handleSubmit} encType="multipart/form-data">
                                 <input type="text" placeholder="Name" id="name" name="name"  
                                     onChange={this.handleValue}

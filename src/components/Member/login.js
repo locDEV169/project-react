@@ -1,9 +1,11 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import MenuLeft from '../Layout/MenuLeft';
 import FormErrors from '../Error/formErrors';
 import axios from 'axios';
-import formErrors from '../Error/formErrors';
+
+const SucecssStyle = {
+    color:'greenyellow'
+}
 
 class Login extends Component{
     constructor(props){
@@ -20,6 +22,7 @@ class Login extends Component{
         // this.handleChangePass = this.handleChangePass.bind(this)
         this.handleValue = this.handleValue.bind(this);
     }
+    
     handleValue(e){ 
         let nameInput = e.target.name;
         let value = e.target.value;
@@ -115,7 +118,7 @@ class Login extends Component{
                             <div className="col-md-8">
                                 <div class="col-sm-7 padding-right">
                                     <div class="login-form">
-                                        <p> {this.state.msg} </p> 
+                                        <p style={SucecssStyle}> {this.state.msg} </p> 
                                         <h2>Login to your account</h2>
                                         <FormErrors formErrors={this.state.formErrors}/>
                                         <form onSubmit={this.handleSubmit}>

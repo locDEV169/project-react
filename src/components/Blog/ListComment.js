@@ -19,7 +19,7 @@ class ListComment extends Component {
     }
     renderComment() {
         let comment = this.props.comment;
-        // console.log(comment);
+        console.log(comment);
         if (comment.length > 0) {
           return comment.map((value, key) => {
             console.log(value["id"])
@@ -103,7 +103,7 @@ class ListComment extends Component {
     render() {
         return (
           <div className="response-area">
-            <h2>{this.props.comment.length} RESPONSES</h2>
+            <h2>{this.props.comment.length} Comment</h2>
             <ul className="media-list">{this.renderComment()}</ul>
           </div>
         );
