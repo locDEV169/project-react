@@ -61,8 +61,8 @@ class Comment extends Component {
             this.props.history.push('/login');
         }
         else{
-            console.log("message :" + message)
-            if(message != ""){
+            // console.log("message :" + message)
+            if(message != ''){
                 //truyền dữ liệu vào form gửi cho Api
                 const formData = new FormData();
                 formData.append("id_blog", getId_Blog);
@@ -83,7 +83,7 @@ class Comment extends Component {
                         // console.log(res)
                         this.props.getComment(res.data.data);
                         this.setState({
-                            msg: "cmt success"
+                            msg: "comment success"
                         });
                         console.log("2")
                     }
@@ -93,11 +93,12 @@ class Comment extends Component {
                 })
             }
             else{
-                errorSubmit.message = 'Vui long nhap binh luan'
-                this.setState={
-                    msg : "Vui long nhap binh luan"
-                }
+                // errorSubmit.message ='Vui long nhap binh luan'
+                this.setState({
+                    msg: "Vui lòng nhập comment"
+                })
             }
+            
         }
     }
     render(){
