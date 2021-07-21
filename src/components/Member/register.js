@@ -2,15 +2,7 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import FormErrors from '../Error/formErrors';
-//import router-dom
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useRouteMatch,
-    useParams,Redirect
-} from "react-router-dom";
+
 
 const SucecssStyle = {
     color:'greenyellow'

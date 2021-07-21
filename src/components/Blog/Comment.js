@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios'
 import { Component } from 'react';
-import MenuLeft from '../Layout/MenuLeft_Blog';
 import FormErrors from '../Error/formErrors';
 import { withRouter } from 'react-router-dom';
 
@@ -36,15 +35,13 @@ class Comment extends Component {
         let flag = true;
         let {message} = this.state;
         let errorSubmit = this.state.formErrors;
-        // lấy login ra JSON.parse(isLogin)
-        const isLogin = localStorage.getItem('isLogin');
-        // get data của user Login từ Local Storage
-        const userData = localStorage.getItem('info')
-        let getData = JSON.parse(userData);
         // get id of blog
         const getId_Blog = this.props.getId;
         let url = "http://localhost:8080/laravel/public/api/blog/comment/" + getId_Blog;
-                // get token of user Login
+        // get token of user Login
+        // get data của user Login từ Local Storage
+        const userData = localStorage.getItem('info')
+        let getData = JSON.parse(userData);
         let accessToken = getData.success.token;
         let config = {
                     headers: {
@@ -53,6 +50,8 @@ class Comment extends Component {
                     Accept: "application/json",
                 },
         };
+        // lấy login ra JSON.parse(isLogin)
+        const isLogin = localStorage.getItem('isLogin');
         if(!JSON.parse(isLogin)){
             this.setState({
                 msg:"Vui long dang Nhap"

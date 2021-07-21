@@ -2,11 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios'
 import { Component } from 'react';
-import MenuLeft from '../Layout/MenuLeft_Blog';
 import Comment from '../Blog/Comment';
 import ListComment from '../Blog/ListComment';
 import { withRouter } from 'react-router-dom';
-
+import Rate from '../Blog/Rate';
 class DetailBlog extends Component{
     constructor(props){
         super(props)
@@ -58,13 +57,6 @@ class DetailBlog extends Component{
                                     <i className="fa fa-calendar" /> DEC 5, 2013
                                 </li>
                             </ul>
-                            <span>
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star-half-o" />
-                            </span>
                         </div>
                         <a href>
                             <img
@@ -116,25 +108,7 @@ class DetailBlog extends Component{
                         <div className="blog-post-area">
                             {this.renderDetail()}
                             {/* <!--/rating-area-->  */}
-                            <div class="rating-area">
-                                <ul class="ratings">
-                                    <li class="rate-this">Rate this item:</li>
-                                    <li>
-                                        <i class="fa fa-star color"></i>
-                                        <i class="fa fa-star color"></i>
-                                        <i class="fa fa-star color"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </li>
-                                    <li class="color">(6 votes)</li>
-                                </ul>
-                                <ul class="tag">
-                                    <li>TAG:</li>
-                                    <li><a class="color" href="">Pink <span>/</span></a></li>
-                                    <li><a class="color" href="">T-Shirt <span>/</span></a></li>
-                                    <li><a class="color" href="">Girls</a></li>
-                                </ul>
-                            </div>
+                            <Rate getId={this.props.match.params.id}/>
                             {/* social network */}
                             <div class="socials-share">
                                 <a href=""><img src="http://localhost:8080/laravel/public/frontend/images/blog/socials.png" alt="" /></a>

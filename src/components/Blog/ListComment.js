@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios'
 import { Component } from 'react';
 
 class ListComment extends Component {
@@ -19,7 +18,7 @@ class ListComment extends Component {
     }
     renderComment() {
         let comment = this.props.comment;
-        console.log(comment);
+        // console.log(comment);
         if (comment.length > 0) {
           return comment.map((value, key) => {
             console.log(value["id"])
