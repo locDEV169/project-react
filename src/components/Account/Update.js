@@ -18,7 +18,6 @@ class Member extends Component {
           level : 0,
           country:""
       };
-
       this.handleValue = this.handleValue.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleInputFile = this.handleInputFile.bind(this);

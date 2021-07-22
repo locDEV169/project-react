@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import StarRatings from 'react-star-ratings';
 import axios from 'axios'
 const SucecssStyle = {
-    color:'yellow'
+    color:'greenyellow'
 }
 class Rate extends Component{
     constructor(props){
@@ -13,7 +12,7 @@ class Rate extends Component{
             msg: "",
             formErrors:"",
             rating:0,
-            numberOfVotes:0,
+            totalrOfVotes:0,
         }
         this.changeRating = this.changeRating.bind(this)
     }
@@ -23,23 +22,22 @@ class Rate extends Component{
         axios.get('http://localhost:8080/laravel/public/api/blog/rate/' + getId)
         .then(res => {
             console.log(res)
-            let id = res.data.data;
-            console.log(this.state)
-            console.log("id " + id)
-            console.log("Object.keys(id).length "+ Object.keys(id).length)
-            if(Object.keys(id).length > 0){
-                let avg = 0;
+            let votes = res.data.data;
+            // console.log(this.state)
+            // console.log("id " + id)
+            console.log("Object.keys(id).length "+ Object.keys(votes).length)
+            if(Object.keys(votes).length > 0){
                 let total = 0;
-                Object.keys(id).map((value , key) =>{
-                    total = total + id[value]['rate'];
-                    console.log( id[value]['rate'])
-                    console.log(Object.keys(id).length)
+                Object.keys(votes).map((value , key) =>{
+                    total = total + votes[value]['rate'];
+                    console.log( votes[value]['rate'])
+                    console.log(Object.keys(votes).length)
                 })
-                avg = total / Object.keys(id).length;
-                console.log(avg)
+                let average = total / Object.keys(votes).length;
+                console.log(average)
                 this.setState({
-                    rating :avg,
-                    numberOfVotes: Object.keys(id).length
+                    rating :average,
+                    totalOfVotes: Object.keys(votes).length
                 })
             }
             else{
@@ -111,7 +109,7 @@ class Rate extends Component{
                             activeColor="#ffd700"
                         />
                     </li>
-                    <li className="color">({this.state.numberOfVotes} votes)</li>
+                    <li className="color">({this.state.totalOfVotes} votes)</li>
                 </ul>
                 <ul className="tag">
                     <li>TAG:</li>

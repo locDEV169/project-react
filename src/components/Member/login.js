@@ -90,7 +90,7 @@ class Login extends Component{
                     const convert = JSON.stringify(res.data);
                     localStorage.setItem("info", convert);
                     const accessToken = res.data.success.token;
-                    console.log("accessToken " + accessToken)
+                    // console.log("accessToken " + accessToken)
                     localStorage.setItem("token", accessToken)
                     // console.log(convert);
                     // set cho islogin=true nếu login đúng

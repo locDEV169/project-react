@@ -59,7 +59,7 @@ class Header extends Component{
     }
     renderAccount(){
         const isLogin = localStorage.getItem('isLogin')
-        console.log(isLogin + " JSON.parse(isLogin) :" + JSON.parse(isLogin));
+        // console.log(isLogin + " JSON.parse(isLogin) :" + JSON.parse(isLogin));
         // cách lấy islogin từ local
         // là localStorage.getItem('isLogin')
         // sau đó chuyển thành biến js để xử lý
@@ -140,26 +140,6 @@ class Header extends Component{
                                         <li><a href="register"><i className="fa fa-lock" /> Register</a></li>
                                         {this.renderLogin()}
                                         {/* header hide account login */}
-                                        {/* <li className="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre="" />
-                                                abc <span class="caret"></span>
-
-                                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" >
-                                                <p><a className="dropdown-item" href="">
-                                                    Logout
-                                                </a></p>
-                                                <p><a className="dropdown-item" href="">
-                                                    View your product
-                                                </a></p>
-                                                <p><a className="dropdown-item" href="">
-                                                    Add product
-                                                </a></p>
-                                                <p><a className="dropdown-item" href="">
-                                                    Profile
-                                                </a></p>
-                                            </div>
-                                        </li> */}
-                                        
                                     </ul>
                                 </div>
                             </div>

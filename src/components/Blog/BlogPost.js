@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-import Pagination from '../Layout/Pagination';
 
 class BlogPost extends Component{
     constructor(props){
