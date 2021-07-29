@@ -4,11 +4,7 @@ import axios from 'axios';
 //import router-dom
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
     Link,
-    useRouteMatch,
-    useParams,Redirect,
     withRouter
 } from "react-router-dom";
 class Header extends Component{

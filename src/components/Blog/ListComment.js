@@ -61,7 +61,7 @@ class ListComment extends Component {
                     </div>
                   </li>
                   {comment.map((value2, key2) => {
-                    if (value2["id_comment"] == value["id"]) {
+                    if (value2["id_comment"] == value[ "id"]) {
                       return (
                         <li className="media second-media">
                           <a className="pull-left" href="#">

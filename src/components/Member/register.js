@@ -57,7 +57,7 @@ class Resign extends Component{
     handleSubmit(e){
         e.preventDefault();
         console.log(this.state)
-        let flag = true; //goi flag de bao loi errors
+        let check = true; //goi check de bao loi errors
         // xet cai value để đưa vào DB
         //báo lỗi của submit
         let errorSubmit = this.state.formErrors;
@@ -69,61 +69,61 @@ class Resign extends Component{
         console.log(errorSubmit)
         //xét từ value để báo lỗi 
         if(!name){
-            flag = false;
-            errorSubmit.name = 'Vui Long nhap Name';
+            check = false;
+            errorSubmit.name = 'Vui Lòng nhập Name';
         }
         else {
-            flag = true;
+            check = true;
             errorSubmit.name = "";
         }
         if(!email){
-            flag = false;
-            errorSubmit.email = 'Vui Long nhap Email';
+            check = false;
+            errorSubmit.email = 'Vui Lòng nhập Email';
         }
         else {
-            flag = true;
+            check = true;
             errorSubmit.email = "";
         }
         if(!password){
-            flag = false;
-            errorSubmit.password = 'Vui Long nhap password';
+            check = false;
+            errorSubmit.password = 'Vui Lòng nhập password';
         }
         else {
-            flag = true;
+            check = true;
             errorSubmit.password = "";
         }
         if(!address){
-            flag = false;
-            errorSubmit.address = 'Vui Long nhap address';
+            check = false;
+            errorSubmit.address = 'Vui Lòng nhập address';
         }
         else {
-            flag = true;
+            check = true;
             errorSubmit.address = "";
         }
         if(!phone){
-            flag = false;
-            errorSubmit.phone = 'Vui Long nhap phone';
+            check = false;
+            errorSubmit.phone = 'Vui Lòng nhập phone';
         }
         else {
-            flag = true;
+            check = true;
             errorSubmit.phone = "";
         }
         if(!country){
-            flag = false;
-            errorSubmit.country = 'Vui Long nhap Country';
+            check = false;
+            errorSubmit.country = 'Vui Lòng nhập Country';
         }
         else {
-            flag = true;
+            check = true;
             errorSubmit.country = "";
         }
         if(file == ''){
-            flag = false;
-            errorSubmit.file = 'Vui Long nhap Avatar'
+            check = false;
+            errorSubmit.file = 'Vui Lòng nhập Avatar'
         }
         else{
-            if(file.size <  25 * 1024 * 1024){
-                flag = false; 
-                errorSubmit.file = 'image < 25mb'
+            if(file.size >  1024 * 1024){
+                check = false; 
+                errorSubmit.file = 'image > 1mg'
             }
             else{
                 // goi type of Image la 'png','jpg','jpeg','PNG','JPG'
@@ -135,7 +135,7 @@ class Resign extends Component{
                 }
             }
         }
-        if(!flag){
+        if(!check){
             this.setState({
                 formErrors: errorSubmit
             });

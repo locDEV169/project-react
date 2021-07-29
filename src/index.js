@@ -22,9 +22,11 @@ import Login from './components/Member/login'
 import Blog from './components/Blog/Blog'
 import DetailBlog from './components/Blog/DetailBlog'
 import register from './components/Member/register'
-import Update from './components/Account/Update';
-
-
+import Update from './components/Account/Member/Update';
+import Add from './components/Account/My-Product/Add';
+import Delete from './components/Account/My-Product/Delete';
+import Edit from './components/Account/My-Product/Edit';
+import List from './components/Account/My-Product/List';
 
 ReactDOM.render(
   
@@ -40,7 +42,11 @@ ReactDOM.render(
           {/* <Route path="/account" render={() => (<Redirect to="/account" />)} /> */}
           <Route path='/blog/list' component={Blog} />
           <Route path='/blog/detail/:id' component={DetailBlog} />
-          <Route path='/account/member' component={Update}/>
+          <Route path='/account/member/' component={Update}/>
+          <Route path='/account/member/my-product/list' component={List}/>
+          <Route path='/account/member/my-product/add' component={Add}/>
+          <Route path='/account/member/my-product/delete' component={Delete}/>
+          <Route path='/account/member/my-product/edit' component={Edit}/>
           {/* <Route component={Account} /> */}
         </Switch>
       </App>

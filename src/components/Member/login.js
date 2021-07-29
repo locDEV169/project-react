@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import { withRouter } from "react-router";
 import ReactDOM from 'react-dom';
 import FormErrors from '../Error/formErrors';
 import axios from 'axios';
@@ -43,7 +44,7 @@ class Login extends Component{
     // }
     handleSubmit(e){
         e.preventDefault();
-        let flag = true; //goi flag de bao loi errors
+        let check = true; //goi check de bao loi errors
         //báo lỗi của submit
         let errorSubmit = this.state.formErrors;
         // let email = this.state.email;
@@ -51,14 +52,14 @@ class Login extends Component{
         let {email,password} = this.state;
 
         if(email == ''){
-            flag = false;
+            check = false;
             errorSubmit.email = 'Vui Long nhap Email';
         }
         if(!password){
-            flag = false;
+            check = false;
             errorSubmit.password = 'Vui Long nhap password';
         }
-        if(!flag){
+        if(!check){
             this.setState({
                 formErrors: errorSubmit
             });
@@ -90,7 +91,6 @@ class Login extends Component{
                     const convert = JSON.stringify(res.data);
                     localStorage.setItem("info", convert);
                     const accessToken = res.data.success.token;
-                    // console.log("accessToken " + accessToken)
                     localStorage.setItem("token", accessToken)
                     // console.log(convert);
                     // set cho islogin=true nếu login đúng
@@ -101,7 +101,7 @@ class Login extends Component{
                     })
                     // alert("successfull and comeback");
                     //nếu đăng nhập đúng thì trả lại home page
-                    this.props.history.push('/login');
+                    this.props.history.push('/home');
                 }              
             })
             .catch(error => console.log(error));
@@ -196,4 +196,4 @@ class Login extends Component{
         )
     }
 }
-export default Login;
+export default withRouter(Login);
