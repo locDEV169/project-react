@@ -101,7 +101,7 @@ class Login extends Component{
                     })
                     // alert("successfull and comeback");
                     //nếu đăng nhập đúng thì trả lại home page
-                    this.props.history.push('/home');
+                    this.props.history.push('/login');
                 }              
             })
             .catch(error => console.log(error));

@@ -36,17 +36,16 @@ ReactDOM.render(
       <App>
         <Switch>
           <Route path='/' component={Home} exact />
-          {/* <Route path='/home' component={Home} exact /> */}
+          <Route path='/home' component={Home} exact />
           <Route path='/login' component={Login} />
           <Route path='/register' component={register} />
-          {/* <Route path="/account" render={() => (<Redirect to="/account" />)} /> */}
           <Route path='/blog/list' component={Blog} />
           <Route path='/blog/detail/:id' component={DetailBlog} />
           <Route path='/account/member/' component={Update}/>
-          <Route path='/account/member/my-product/list' component={List}/>
-          <Route path='/account/member/my-product/add' component={Add}/>
-          <Route path='/account/member/my-product/delete' component={Delete}/>
-          <Route path='/account/member/my-product/edit' component={Edit}/>
+          <Route path='/account/my-product/' component={List}/>
+          <Route path='/account/addProduct' component={Add}/>
+          <Route path='/account/deleteProduct' component={Delete}/>
+          <Route path='/account/editProduct' component={Edit}/>
           {/* <Route component={Account} /> */}
         </Switch>
       </App>
