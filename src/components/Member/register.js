@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import FormErrors from '../Error/formErrors';
-
+import { Link } from "react-router-dom";
 
 const SucecssStyle = {
     color:'greenyellow'
@@ -121,9 +121,9 @@ class Resign extends Component{
             errorSubmit.file = 'Vui Lòng nhập Avatar'
         }
         else{
-            if(file.size >  1024 * 1024){
+            if(file.size <  20*1024 * 1024){
                 check = false; 
-                errorSubmit.file = 'image > 1mg'
+                errorSubmit.file = 'image < 20MB'
             }
             else{
                 // goi type of Image la 'png','jpg','jpeg','PNG','JPG'
@@ -180,7 +180,7 @@ class Resign extends Component{
     render(){
         
         return(
-            <div className="container ">
+            <div className="container">
                 <div className="row">
                     {/* Menu left */}
                     <div className="col-sm-3 resign-left">
@@ -192,8 +192,12 @@ class Resign extends Component{
                                 <div className="panel-heading">
                                     <h4 className="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordian" href="#account">
-                                            <span className="badge pull-right"><i className="fa fa-plus"></i></span>
+                                        <Link to="/account/member" >
                                             Account
+                                            <span className="badge pull-right">
+                                                <i className="fa fa-plus" />
+                                            </span>
+                                        </Link>
                                         </a>
                                     </h4>
                                 </div>
@@ -211,10 +215,12 @@ class Resign extends Component{
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <h4 className="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#products">
-                                            <span className="badge pull-right"><i className="fa fa-plus"></i></span>
-                                            My Products
-                                        </a>
+                                    <Link to="/account/my-product" >
+                                        My Product
+                                    </Link>
+                                    <span className="badge pull-right">
+                                    <i className="fa fa-plus" />
+								</span>
                                     </h4>
                                 </div>
                                 <div id="products" className="panel-collapse collapse">

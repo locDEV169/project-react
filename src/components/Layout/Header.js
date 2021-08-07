@@ -8,22 +8,6 @@ import {
     withRouter
 } from "react-router-dom";
 class Header extends Component{
-    // renderLogin(){
-    //   - goi local ra de lay bien ma khi login xong tao ra 
-    //   - kiem tra bien do co k?
-    //     + co: 
-    //       return (
-    //         <li><a onClick={e=>this.logout(e)}><i className="fa fa-lock" />logout</a></li>
-    //       )
-    //     + k co :
-    //       return (
-    //         <li><a href="login.html"><i className="fa fa-lock" />Login</a></li>
-    //       )
-    // }
-    // logout(){
-    //   set bien login da co trong localStorage thanh false
-    //   va chuyen ve lai login
-    // }
     constructor(props){
         super(props);
     }
@@ -133,7 +117,7 @@ class Header extends Component{
                                     <ul className="nav navbar-nav">
                                         {this.renderAccount()}
                                         <li><a href="cart.html"><i className="fa fa-shopping-cart"></i> Cart</a></li>
-                                        <li><a href="register"><i className="fa fa-lock" /> Register</a></li>
+                                        <li><Link to="/register"><i className="fa fa-lock" />Register</Link></li>
                                         {this.renderLogin()}
                                         {/* header hide account login */}
                                     </ul>

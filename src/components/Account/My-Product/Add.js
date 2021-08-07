@@ -84,9 +84,9 @@ class Add extends Component{
         if(categoryArray.length >0) {
             return categoryArray.map((value, key)=>{
             // console.log(value['category'])
-              return (
-                <option value={value['id']}>{value['category']}</option>
-              )
+                return (
+                    <option value={value['id']}>{value['category']}</option>
+                )
             })
           }
     }
@@ -96,9 +96,9 @@ class Add extends Component{
         if(brandArray.length >0) {
             return brandArray.map((value, key)=>{
             console.log(value['brand'])
-              return (
-                <option value={value['id']}>{value['brand']}</option>
-              )
+                return (
+                    <option value={value['id']}>{value['brand']}</option>
+                )
             })
           }
     }
@@ -165,7 +165,7 @@ class Add extends Component{
            }
            else{
                Object.keys(files).map((key,index)=>{
-                   console.log("files[key][size] : "+ files[key]["size"]);
+                   console.log("files[key][size] : " + files[key]["size"]);
                    console.log("files[key][name].split(.): "+files[key]["name"].split("."))
                    if(files[key]["size"] > 20 * 1024 * 1024 ){
                        check = false;
@@ -173,16 +173,16 @@ class Add extends Component{
                        console.log("1")
                    }
                    else{
-                    const typeImg = ["png", "jpg", "jpeg", "PNG", "JPG"]
-                    let res = files[key]["name"].split(".")
-                    console.log("0")
-                    if (!typeImg.includes(res[1])) {
-                        errorsSubmit.files = "vui lòng upload đúng định dạng images";
-                    }
-                    else{
-                      check = true;
-                      errorsSubmit.files = ''
-                    }
+                        const typeImg = ["png", "jpg", "jpeg", "PNG", "JPG"]
+                        let res = files[key]["name"].split(".")
+                        console.log("0")
+                        if (!typeImg.includes(res[1])) {
+                            errorsSubmit.files = "vui lòng upload đúng định dạng images";
+                        }
+                        else{
+                            check = true;
+                            errorsSubmit.files = ''
+                        }
                    }
                })
            }
@@ -242,13 +242,13 @@ class Add extends Component{
                         });
                     }
                 })
+                .catch((error) => console.log(error));
         }
     }
     render(){
         console.log(this.state)
         return(
-            <div >
-                <div className="container">
+            <div className="container">
                     <div className="row">
                         <div className="col-sm-3">
                             <MenuLeft_Account />
@@ -280,7 +280,7 @@ class Add extends Component{
                                         onChange={this.handleValue}
                                         style={{margin:"0px 10px 10px 0px"}}
                                         >
-                                        <option value="this.state.category">Category</option>
+                                        <option value="">Category</option>
                                         {this.ListCategory()}
                                     </select>
                                     
@@ -291,7 +291,7 @@ class Add extends Component{
                                         onChange={this.handleValue}
                                         style={{margin:"0px 10px 10px 0px"}}
                                         >
-                                        <option value="this.state.brand">Brand</option>
+                                        <option value="">brand</option>
                                         {this.ListBrand()}
                                     </select>
                                     <select
@@ -336,11 +336,7 @@ class Add extends Component{
                                 </form>
                             </div>
                         </div>
-                    </div>
-                    
-                </div>
-
-                
+                    </div> 
             </div>
         )
     }

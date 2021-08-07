@@ -45,7 +45,7 @@ ReactDOM.render(
           <Route path='/account/my-product/' component={List}/>
           <Route path='/account/addProduct' component={Add}/>
           <Route path='/account/deleteProduct' component={Delete}/>
-          <Route path='/account/editProduct' component={Edit}/>
+          <Route path='/account/editProduct/:id' component={Edit}/>
           {/* <Route component={Account} /> */}
         </Switch>
       </App>

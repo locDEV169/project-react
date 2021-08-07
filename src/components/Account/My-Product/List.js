@@ -17,61 +17,64 @@ class List extends Component{
         const convertInfo = JSON.parse(getInfo)
         let accessToken = convertInfo.success.token;
         let config = {
-          headers: {
-            Authorization: "Bearer " + accessToken,
-            "Content-Type": "application/x-www-form-urlencoded",
-            Accept: "application/json",
-          },
+            headers: {
+                Authorization: "Bearer " + accessToken,
+                "Content-Type": "application/x-www-form-urlencoded",
+                Accept: "application/json",
+            },
         };
         const url = "http://localhost:8080/laravel/public/api/user/my-product";
         axios.get(url,config).then((res) => {
             console.log(res)
-            this.setState({
-                productData: res.data.data,
-            });
-          })
-          .catch((error) => console.log(error));
-          console.log(this.state)
+                this.setState({
+                    productData: res.data.data,
+                });
+            })
+            .catch((error) => console.log(error));
+        console.log(this.state)
     }
+    
     ListProduct() {
         let productData = this.state.productData;
         console.log(productData)
         console.log((Object.keys(productData).length))
         if (Object.keys(productData).length > 0) {
-            
-            return Object.keys(productData).map((key, index) => {
-                console.log(productData[key]["id_user"])
-                const covertImages = JSON.parse(productData[key]["image"])
+            return Object.keys(productData).map((value, key) => {
+                console.log(productData[value]["image"])
+                // vì file images là  json tap hop nhieu hinh anh
+                //convert lại Array để rút ra tên images
+                const covertImages = JSON.parse(productData[value]["image"])
+                console.log(productData[value]["id"])
                 return (
                     <tr>
-                    {/* id */}
+                        {/* id */}
                         <td className="cart_product">
                             <a>
-                                <p style={{marginTop: "10px",color:"Blue"}}>{productData[key]["id"]}</p>
+                                <p style={{marginTop: "10px",color:"Blue"}}>{productData[value]["id"]}</p>
                             </a>                      
                         </td>
                         {/* name */}
                         <td className="cart_description">
                             <h4>
-                                <p style={{fontSize: "20px",color:"blue"}}>{productData[key]["name"]}</p>
+                                <p style={{fontSize: "16px",color:"blue"}}>{productData[value]["name"]}</p>
                             </h4>
                         </td>
                         {/* image */}
                         <td className="cart-product">
                             <a href>
                                 <img
-                                src={"http://localhost:8080/laravel/public/upload/user/product/"+ productData[key]["id_user"]+"/" + covertImages[0]}
-                                style={{width: "70px"}}
+                                    src={"http://localhost:8080/laravel/public/upload/user/product/"+ productData[value]["id_user"]+"/" + covertImages[0]}
+                                    style={{width: "70px"}}
                                 />
                             </a>
                         </td>
                         {/* price */}
                         <td className="cart_price">
-                            <p>${productData[key]["price"]}</p>
+                            <p>${productData[value]["price"]}</p>
                         </td>
                         {/* action */}
                         <td className="cart_action">
-                            <Link to={"/account/editProduct/"}>
+                            <Link to={"/account/editProduct/" + productData[value]["id"]}>
                                 Edit
                             </Link>
                         <br />
@@ -91,6 +94,7 @@ class List extends Component{
             </tr>
         }  
     }
+    
     render(){
         return(
             <div className="col-sm-9">
@@ -101,11 +105,12 @@ class List extends Component{
                                 <MenuLeft_Account />
                             </div>
                             <div className="col-sm-7">
+                                <h3 style={{color:"blueviolet"}}>List Product</h3>
                                 <div className="table-responsive cart_info">
                                     <table className="table table-condensed">
                                         <thead>
                                             <tr class="cart_menu">
-                                                <td className="id">ID</td>
+                                                <td className="id">ID Product</td>
                                                 <td className="name">name</td>
                                                 <td className="image">Image</td>
                                                 <td className="price">Price</td>
