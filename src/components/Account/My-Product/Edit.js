@@ -96,10 +96,11 @@ class Edit extends Component{
     listImages(e){
         let {id} = this.state;
         const {imageArray} = this.state;
-        console.log(imageArray)
-        if(imageArray.length > 0){
+        console.log(Object.keys(this.state.imageArray).length)
+        if(Object.keys(this.state.imageArray).length > 0){
             return imageArray.map((value,key)=>{
                 // console.log(imageArray[key])
+                // const covertImages = JSON.parse(imageArray[key])
                 return(
                     <li style={{display:"inline-block", margin:"10px 20px"}} key={value}>
                         <img  style={{width:"70px",height:""}} src={"http://localhost:8080/laravel/public/upload/user/product/" +id +  "/" + value}/>
@@ -110,28 +111,6 @@ class Edit extends Component{
             })
         }
     }
-    clickCheckbox(e){
-        let checked = e.target.checked;
-        let nameImages = e.target.value;
-        let {avatarCheckBox} = this.state;
-        // alert("checked: "+ checked +" name image: " + nameImages)
-        if(checked){
-            avatarCheckBox.push({nameImages})
-            this.setState({
-                avatarCheckBox: avatarCheckBox
-            })
-        }
-        else{
-            //prototype indexOf của Array dùng để Tìm chỉ mục của một mục trong Mảng
-            // tìm item có tên nameImages để xóa
-            let itemImages = avatarCheckBox.indexOf(nameImages);
-            //prototype splice của Array dùng để Xóa một mục theo vị trí chỉ mục
-            // xóa đúng với item có trong avatarCheckBox[]
-            avatarCheckBox.splice(itemImages);
-        }
-        console.log(this.state.avatarCheckBox)
-    }
-
     componentDidMount() {
         // get tên của category and brand
         axios.get("http://localhost:8080/laravel/public/api/category-brand")
@@ -186,6 +165,30 @@ class Edit extends Component{
             })
             .catch(errors => console.log(errors));
         console.log(this.state)
+    }
+    clickCheckbox(e){
+        let checked = e.target.checked;
+        let nameImages = e.target.value;
+        let {avatarCheckBox,imageArray} = this.state;
+        console.log(nameImages)
+        if(checked){
+            avatarCheckBox.push({nameImages})
+            this.setState({
+                avatarCheckBox: avatarCheckBox
+            })
+        }
+        else{
+            //prototype indexOf của Array dùng để Tìm chỉ mục của một mục trong Mảng
+            // tìm item có tên nameImages để xóa
+            let itemImages = avatarCheckBox.indexOf(nameImages);
+            console.log(itemImages)
+            //prototype splice của Array dùng để Xóa một mục theo vị trí chỉ mục
+            // xóa đúng với item có trong avatarCheckBox[]
+            avatarCheckBox.splice(itemImages,1);
+        }
+        console.log(this.state.avatarCheckBox)
+        // console.log(this.state.imageArray)
+        // console.log(this.state.hinhConLai)
     }
     handleEditProduct(e){
         e.preventDefault();
@@ -249,11 +252,16 @@ class Edit extends Component{
         else{
             // quét map cho avatarCheckBox để lấy ra tên Image
             avatarCheckBox.map((value,key) =>{
+                console.log(value)
                 //tìm tên ảnh có trong Array hình còn lại hay không
-                let item = hinhConLai.indexOf(value)
+                var item = hinhConLai.indexOf(value)
                 //nếu có thì có thì xóa khỏi Array hình còn lại
-                if(item){
-                    hinhConLai.splice(hinhConLai.indexOf(value),1) 
+                if(item == -1){
+                    hinhConLai.splice(hinhConLai.indexOf(value),1)
+                    console.log("33333")
+                }
+                else{
+                    console.log("4444")
                 }
             })
             if(Object.keys(files).length + hinhConLai.length > 3 ){
@@ -313,12 +321,20 @@ class Edit extends Component{
             formData.append("company", this.state.company);
             formData.append("status", this.state.status);
             formData.append("sale", 0);
-            Object.keys(files).map((key,index)=>{
-                formData.append("file[]",files[key])
+            Object.keys(files).map((value,index)=>{
+                formData.append("file[]",files[value])
+            })
+            Object.keys(hinhConLai).map((value,key)=>{
+                formData.append('hinhConLai[]',hinhConLai[value])
             })
             avatarCheckBox.map((value,key)=>{
                 formData.append('avatarCheckBox[]',value)
             })
+            console.log(this.state.hinhConLai)
+            // console of FormData
+            for (var pair of formData.entries()) {
+                console.log(pair[0]+ ', ' + pair[1]); 
+            }
             axios.post(url,formData,config)
                 .then((res)=>{
                     console.log(res)

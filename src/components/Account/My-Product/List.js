@@ -11,6 +11,7 @@ class List extends Component{
             msg: "",
             productData:{},
         }
+        this.handleRemove = this.handleRemove.bind(this)
     }
     componentDidMount() {
         const getInfo  = localStorage.getItem("info");
@@ -33,6 +34,28 @@ class List extends Component{
             .catch((error) => console.log(error));
         console.log(this.state)
     }
+    handleRemove(e) {
+        let getId = e.target.id;
+        const convertInfo = JSON.parse(localStorage["info"]);
+        const url ="http://localhost:8080/laravel/public/api/user/delete-product/" + getId;
+        console.log(convertInfo);
+        let accessToken = convertInfo.success.token;
+        let config = {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json",
+          },
+        };
+        axios.get(url, config)
+            .then((res) => {
+            console.log(res.data.data);
+                this.setState({
+                    productData: res.data.data,
+                });
+            })
+          .catch((error) => console.log(error));
+      }
     
     ListProduct() {
         let productData = this.state.productData;
@@ -78,9 +101,9 @@ class List extends Component{
                                 Edit
                             </Link>
                         <br />
-                            <Link to={"/account/deleteProduct/"}>
+                            <a id={productData[value]["id"]} onClick={this.handleRemove}>
                                 Delete
-                            </Link>
+                            </a>
                         </td>
                     </tr>
                 );
