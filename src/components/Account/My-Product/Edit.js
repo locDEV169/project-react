@@ -176,6 +176,20 @@ class Edit extends Component{
             this.setState({
                 avatarCheckBox: avatarCheckBox
             })
+            // avatarCheckBox.map((value,key) =>{
+            //     hinhConlai.map((item,index) =>{
+            //    
+            //     })
+            //     console.log(value)
+            //     var item = hinhConLai.indexOf(value)
+            //     if(item == -1){
+            //         hinhConLai.splice(hinhConLai.indexOf(value),1)
+            //         console.log("33333")
+            //     }
+            //     else{
+            //         console.log("4444")
+            //     }
+            // })
         }
         else{
             //prototype indexOf của Array dùng để Tìm chỉ mục của một mục trong Mảng

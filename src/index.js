@@ -27,7 +27,8 @@ import Add from './components/Account/My-Product/Add';
 import Delete from './components/Account/My-Product/Delete';
 import Edit from './components/Account/My-Product/Edit';
 import List from './components/Account/My-Product/List';
-
+import ListProduct from './components/Product/ListProduct'
+import DetailProduct from './components/Product/DetailProduct';
 ReactDOM.render(
   
   <React.StrictMode>
@@ -35,12 +36,17 @@ ReactDOM.render(
     <Router>
       <App>
         <Switch>
-          <Route path='/' component={Home} exact />
-          <Route path='/home' component={Home} exact />
+          <Route path='/' component={ListProduct} exact />
+          <Route path='/home' component={ListProduct} exact />
           <Route path='/login' component={Login} />
           <Route path='/register' component={register} />
+
           <Route path='/blog/list' component={Blog} />
           <Route path='/blog/detail/:id' component={DetailBlog} />
+
+          <Route path='/product/home' component={ListProduct} />
+          <Route path='/product/detail/:id' component={DetailProduct} />
+
           <Route path='/account/member/' component={Update}/>
           <Route path='/account/my-product/' component={List}/>
           <Route path='/account/addProduct' component={Add}/>
