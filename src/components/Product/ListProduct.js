@@ -41,14 +41,15 @@ class ListProduct extends Component{
                 //covert Image để hiển thị vì ảnh là file JSON
                 let convertImages = JSON.parse(value["image"]);
                 var convertStatus = JSON.parse(value['status'])
-                console.log(value["status"])
+                var convertIdUser = JSON.parse(value['id_user'])
+                console.log(value["id_user"])
                 return(
                     <div class="col-sm-4" key ={key}>
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
                                 <img
-                                    src={"http://localhost:8080/laravel/public/upload/user/product/"+value["id_user"] +"/" +convertImages[0]} alt={value["name"]}
+                                    src={"http://localhost:8080/laravel/public/upload/product/"+value["id_user"] +"/" +convertImages[0]} alt={value["name"]}
                                     style={{width:"200px"}}
                                 />
                                 <h2>${value["price"]}</h2>

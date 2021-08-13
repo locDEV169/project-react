@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="%PUBLIC_URL%/css/price-range.css" />
     <link rel="stylesheet" href="%PUBLIC_URL%/css/animate.css" />
     <link rel="stylesheet" href="%PUBLIC_URL%/css/responsive.css" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/react-popupbox.css" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -45,6 +46,11 @@
     <!-- Link Js -->
     <script src="%PUBLIC_URL%/js/main.js"></script>
     <script src="%PUBLIC_URL%/js/price-range.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+		    $("a[rel^='prettyPhoto']").prettyPhoto();
+		});
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

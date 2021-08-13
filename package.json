@@ -15,9 +15,11 @@
     "query-string": "^7.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-popupbox": "^2.0.8",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-star-ratings": "^2.3.0",
+    "reactjs-popup": "^2.0.5",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
