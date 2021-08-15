@@ -53,20 +53,6 @@ function Example() {
     );
 }
 
-// function openPopupbox(props) {
-//     const content = props.contentImage;
-//     PopupboxManager.open({
-//       content,
-//       config: {
-//         titleBar: {
-//           enable: true,
-//           text: 'Meow!'
-//         },
-//         fadeIn: true,
-//         fadeInSpeed: 500
-//       }
-//     })
-// }
 class DetailProduct extends Component {
     constructor(props){
         super(props)
@@ -76,18 +62,22 @@ class DetailProduct extends Component {
             categoryArray: {},
             brandArray: {},
             count: 0,
+            nameImg: "",
         }
         this.Product = this.Product.bind(this);
-        this.openPopupbox = this.openPopupbox.bind(this)
+        this.openPopupbox = this.openPopupbox.bind(this);
+        this.listImg = this.listImg.bind(this)
+        // this.Img = this.Img.bind(this)
     }
     componentDidMount(){
         const getId = this.props.match.params.id
         axios.get("http://localhost:8080/laravel/public/api/product/detail/ "+getId)
             .then((res) => {
-                console.log(res)
+                // console.log(res)
                 this.setState ({
                     id: getId,
-                    product : res.data.data
+                    product : res.data.data,
+                    listImg: res.data.data.image,
                 })
             })
             .catch((error) => console.log(error));
@@ -96,82 +86,128 @@ class DetailProduct extends Component {
         axios.get(url)
             .then((res) => {
                 // console.log(res);
-                this.setState({
+            this.setState({
                 categoryArray: res.data.category,
                 brandArray: res.data.brand,
             });
-            console.log(res.data)
-            console.log(this.state.categoryArray)    
+            // console.log(res.data)
+            //console.log(this.state.categoryArray)    
         })
             .catch(error => console.log(error));
-            
+    } 
+    listImg(){
+        const {product,nameImg} = this.state;
+        //console.log(product)
+        if(Object.keys(product).length > 0){
+            const convertImage = JSON.parse(product['image'])
+            if(convertImage.length > 0){
+                return convertImage.map((value,key) =>{
+                    // console.log(value)
+                    // console.log(product["id_user"])
+                    let url = "http://localhost:8080/laravel/public/upload/product/" + product["id_user"] +"/"+ value;
+                    // console.log(url)
+                    // console.log(nameImg)
+                    return (
+                        <img 
+                            key={value}
+                            value={value}
+                            src={url} 
+                            alt="" 
+                            style={{width:"70px",height:"70px"}}
+                            onClick={() => this.setState({nameImg: value})}
+                        />
+                    )
+                })
+            }  
+        }
     }
+    // Img(){
+    //     const {product,nameImg} = this.state;
+    //     if(Object.keys(product).length > 0){
+    //         const convertImage = JSON.parse(product['image'])
+    //         if(convertImage.length > 0){
+    //             this.setState({
+    //                 nameImg: convertImage[0]
+    //             })
+    //             return (
+    //                 <img src={"http://localhost:8080/laravel/public/upload/product/" +product["id_user"] +"/"+ nameImg} alt="" />
+    //             )
+    //         }
+    //     }
+    // }
     openPopupbox() {
-        let {product} = this.state;
+        const {product,nameImg} = this.state;
         if(Object.keys(product).length > 0){
             // console.log(product['image']);
             const convertImage = JSON.parse(product['image'])
-            let url = "http://localhost:8080/laravel/public/upload/product/" + product['id_user'] + "/"+ convertImage[0];
-            const content = <img src={url}/>
-            console.log(content);
-            PopupboxManager.open({
-                content,
-                config: {
-                    titleBar: {
-                    enable: true,
-                    text: 'Zoom For Image[0]!'
-                    },
-                fadeIn: true,
-                fadeInSpeed: 500
-              }
-            })
+            if(convertImage.length > 0){
+                let url = "http://localhost:8080/laravel/public/upload/product/" + product['id_user'] + "/"+ nameImg;
+                const content = <img src={url} style={{width:"450px"}}/>
+                console.log(content);
+                PopupboxManager.open({
+                    content,
+                    config: {
+                        titleBar: {
+                        enable: true,
+                        text: 'Zoom For Image[0]!'
+                        },
+                    fadeIn: true,
+                    fadeInSpeed: 500
+                  }
+                })
+            }
         }
     }
     Product(){
-        let {product} = this.state;
+        const {product,nameImg} = this.state;
         // console.log(this.state.product);
         if(Object.keys(product).length > 0){
             console.log(product['image']);
             const convertImage = JSON.parse(product['image'])
             var convertStatus = JSON.parse(product['status'])
             const convertBrand = JSON.parse(product['id_brand'])
-            console.log(convertImage)
-            const contentImage = "http://localhost:8080/laravel/public/upload/product/" + product['id_user'] +'/'+ convertImage[0]
-            console.log(contentImage)
+            // this.state.nameImg = convertImage[0]
+            // this.setState({
+            //     nameImg: convertImage[0]
+            // })
             return(
                 <div className="col-sm-9 padding-right">
                     <div className="product-details">
                         <div className="col-sm-5">
                             <div className="view-product">
-                                <img src={"http://localhost:8080/laravel/public/upload/product/" +product["id_user"] +"/"+ convertImage[0]} alt="" />
+                                {/* test name Images để tranfer */}
+                                <img src={"http://localhost:8080/laravel/public/upload/product/" +product["id_user"] +"/"+ nameImg} alt="" />
+                                {/* {this.Img()} */}
                                 {/* làm effect zoom giống như note trong ListApi */}
-                                {/* <a href={"http://localhost:8080/laravel/public/upload/product/" +product["id_user"] +"/"+ convertImage[0]} rel="prettyPhoto">
-                                    <h3>
-                                        <button onClick={}>Zoom</button>
-                                    </h3>
-                                </a> */}
                                 <h3>
                                     <button onClick={this.openPopupbox}>Zoom</button>
                                     <PopupboxContainer style={{color:"black"}}/>
                                 </h3>
                                 <p style={{color:"red"}}>Test useState</p>
                                     <p>You clicked {this.state.count} times</p>
-                                <h4>
+                                {/* test Hook useState */}
+                                <h5>
                                     <button onClick={() => this.setState({ count: this.state.count + 1 })} >Test Hook</button>
-                                </h4>
+                                    <Example />
+                                </h5>
                             </div>
                             <div id="similar-product" className="carousel slide" data-ride="carousel">
                                 <div className="carousel-inner">
-                                    <div className="item active">
-                                        <img src={"http://localhost:8080/laravel/public/upload/product/" + product["id_user"] +"/"+ convertImage[0]} alt="" />
+                                    <div className="item active" style={{display:"inline-block"}}>
+                                        {/* <img 
+                                            src={"http://localhost:8080/laravel/public/upload/product/" + product["id_user"] +"/"+ convertImage} 
+                                            alt="" 
+                                            style={{width:"50px",height:"70px"}}
+                                        /> */}
+                                        {this.listImg()}
                                     </div>
                                 </div>
                                 <a className="left item-control" href="#similar-product" data-slide="prev">
-									<i className="fa fa-angle-left"></i>
-								</a>
+                                    <i className="fa fa-angle-left"></i>
+                                </a>
                                 <a className="right item-control" href="#similar-product" data-slide="next">
-									<i className="fa fa-angle-right"></i>
-								</a>
+                                    <i className="fa fa-angle-right"></i>
+                                </a>
                             </div>
                         </div>
                         <div class="col-sm-7">
@@ -202,6 +238,7 @@ class DetailProduct extends Component {
                     </div>
                 </div>
             )
+            
         }
     }
     render(){

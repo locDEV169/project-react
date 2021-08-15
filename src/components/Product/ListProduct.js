@@ -19,6 +19,8 @@ class ListProduct extends Component{
         super(props)
         this.state = {
             product: [],
+            qty:0,
+            objProduct: []
         }
         this.ListProduct = this.ListProduct.bind(this)
     }
