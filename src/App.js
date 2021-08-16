@@ -14,7 +14,8 @@ import Pagination from './components/Layout/Pagination';
 class App extends Component{
   constructor(props){
     super(props)
-    
+    // create a variable count = 0,
+     
   }
   render(){
     return (
