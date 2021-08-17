@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import FormErrors from '../Error/formErrors';
 import { Link } from "react-router-dom";
 
 function PanerStatus(props){
@@ -61,7 +60,6 @@ class ListProduct extends Component{
         var qty = 1 
         var objCarts = {};
         var check = 1;
-        objCarts[getId] = qty
         var convertCart = localStorage.getItem("carts");
         if(convertCart){
             objCarts = JSON.parse(convertCart)
@@ -139,53 +137,7 @@ class ListProduct extends Component{
             <div className="features_items">
                 <h2 className="title text-center">Features Items</h2>
                 {this.ListProduct()}
-                {/* {product.length > 0 ? product.map((value, key) => {
-                         //covert Image để hiển thị vì ảnh là file JSON
-                let convertImages = JSON.parse(value["image"]);
-                var convertStatus = JSON.parse(value['status'])
-                var convertIdUser = JSON.parse(value['id_user'])
-                console.log(value["id_user"])
-                return(
-                    <div class="col-sm-4" key ={key}>
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img
-                                        src={"http://localhost:8080/laravel/public/upload/product/"+value["id_user"] +"/" +convertImages[0]} alt={value["name"]}
-                                        style={{width:"200px"}}
-                                    />
-                                    <h2>${value["price"]}</h2>
-                                    <p>{value["name"]}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                    <button className="btn btn-default add-to-cart" 
-                                    onClick={() => this.handleAddtoCart(value)}>
-                                        <i class="fa fa-shopping-cart"></i>Add to cart
-                                    </button>
-                                </div>
-                                <div class="product-overlay">
-                                    <div class="overlay-content">
-                                        <h2>${value["price"]}</h2>
-                                        <p>{value["name"]}</p>
-                                        <a id={value["id"]} class="btn btn-default add-to-cart">
-                                            <i class="fa fa-shopping-cart"></i>Add to cart
-                                        </a>
-                                        <button className="btn btn-default add-to-cart" >
-                                                <i class="fa fa-shopping-cart"></i>Add to cart
-                                        </button>
-                                    </div>
-                                </div>
-                                <PanerStatus status={convertStatus}/>
-                            </div>
-                            <div class="choose">
-                                <ul class="nav nav-pills nav-justified">
-                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                    <li><Link to={"/product/detail/" + value["id"]}><i class="fa fa-plus-square"></i>Detail</Link></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                )
-                }) : null} */}
+                
             </div>
         )
     }

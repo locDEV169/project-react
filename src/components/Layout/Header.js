@@ -116,7 +116,8 @@ class Header extends Component{
                                 <div className="shop-menu clearfix pull-right">
                                     <ul className="nav navbar-nav">
                                         {this.renderAccount()}
-                                        <li><a href="cart.html"><i className="fa fa-shopping-cart"></i> Cart</a></li>
+                                        {/* <li><a href="cart.html"><i className="fa fa-shopping-cart"></i> Cart</a></li> */}
+                                        <li> <Link to="/cart"><i className="fa fa-lock" /> Cart</Link> </li>
                                         <li><Link to="/register"><i className="fa fa-lock" />Register</Link></li>
                                         {this.renderLogin()}
                                         {/* header hide account login */}
