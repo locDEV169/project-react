@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import MenuLeft_Account from "../../Layout/MenuLeft_Account";
+import MenuLeft_Account from '../MenuLeft';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 

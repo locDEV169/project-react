@@ -24,11 +24,12 @@ import DetailBlog from './components/Blog/DetailBlog'
 import register from './components/Member/register'
 import Update from './components/Account/Member/Update';
 import Add from './components/Account/My-Product/Add';
-import Delete from './components/Account/My-Product/Delete';
 import Edit from './components/Account/My-Product/Edit';
 import List from './components/Account/My-Product/List';
 import ListProduct from './components/Product/ListProduct'
 import DetailProduct from './components/Product/DetailProduct';
+import Cart from './components/Product/Cart';
+import Account from './components/Account/Index'
 ReactDOM.render(
   
   <React.StrictMode>
@@ -46,13 +47,13 @@ ReactDOM.render(
 
           <Route path='/product/home' component={ListProduct} />
           <Route path='/product/detail/:id' component={DetailProduct} />
+          <Route path='/product/cart' component={Cart} />
 
-          <Route path='/account/member/' component={Update}/>
+          {/* <Route path='/account/member/' component={Update}/>
           <Route path='/account/my-product/' component={List}/>
           <Route path='/account/addProduct' component={Add}/>
-          <Route path='/account/deleteProduct' component={Delete}/>
-          <Route path='/account/editProduct/:id' component={Edit}/>
-          {/* <Route component={Account} /> */}
+          <Route path='/account/editProduct/:id' component={Edit}/> */}
+          <Route component={Account} />
         </Switch>
       </App>
     </Router>

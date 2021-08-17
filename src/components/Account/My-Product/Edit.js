@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import MenuLeft_Account from "../../Layout/MenuLeft_Account";
 import FormErrors from '../../Error/formErrors';
 import axios from "axios";
+import MenuLeft_Account from '../MenuLeft';
 const SucecssStyle = {
     color:'greenyellow'
 }
