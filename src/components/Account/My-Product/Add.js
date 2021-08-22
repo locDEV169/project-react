@@ -166,9 +166,9 @@ class Add extends Component{
                Object.keys(files).map((key,index)=>{
                    console.log("files[key][size] : " + files[key]["size"]);
                    console.log("files[key][name].split(.): "+files[key]["name"].split("."))
-                   if(files[key]["size"] > 20 * 1024 * 1024 ){
+                   if(files[key]["size"] > 1024 * 1024 ){
                        check = false;
-                       errorsSubmit.files = 'images < 20MB'
+                       errorsSubmit.files = 'images > 1MB'
                        console.log("1")
                    }
                    else{

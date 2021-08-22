@@ -11,21 +11,14 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams,Redirect
 } from "react-router-dom";
 
 //component
-import Home from './components/Home'
+//import Home from './components/Home'
 import Login from './components/Member/login'
 import Blog from './components/Blog/Blog'
 import DetailBlog from './components/Blog/DetailBlog'
 import register from './components/Member/register'
-import Update from './components/Account/Member/Update';
-import Add from './components/Account/My-Product/Add';
-import Edit from './components/Account/My-Product/Edit';
-import List from './components/Account/My-Product/List';
 import ListProduct from './components/Product/ListProduct'
 import DetailProduct from './components/Product/DetailProduct';
 import Cart from './components/Product/Cart';

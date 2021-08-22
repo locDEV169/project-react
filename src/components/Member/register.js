@@ -121,7 +121,7 @@ class Resign extends Component{
             errorSubmit.file = 'Vui Lòng nhập Avatar'
         }
         else{
-            if(file.size <  20*1024 * 1024){
+            if(file.size >  1024 * 1024){
                 check = false; 
                 errorSubmit.file = 'image < 20MB'
             }
