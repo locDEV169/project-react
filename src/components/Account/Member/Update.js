@@ -75,35 +75,35 @@ class Update extends Component {
       let check = true;
       let { name, file, phone, address, country } = this.state;
       let errorsSubmit = this.state.formErrors;
-      if (name == "") {
+      if (name === "") {
         check = false;
         errorsSubmit.name = "Vui lòng điền Name";
       } else {
         check = true;
         errorsSubmit.name = "";
       }
-      if (phone == "") {
+      if (phone === "") {
         check = false;
         errorsSubmit.phone = "Vui lòng điền Phone";
       } else {
         check = true;
         errorsSubmit.phone = "";
       }
-      if (address == "") {
+      if (address === "") {
         check = false;
         errorsSubmit.address = "Vui lòng điền địa chỉ";
       } else {
         check = true;
         errorsSubmit.address = "";
       }
-      if (country == "") {
+      if (country === "") {
         check = false;
         errorsSubmit.country = "Vui lòng điền Country";
       } else {
         check = true;
         errorsSubmit.country = "";
       }
-      if(file == ''){
+      if(file === ''){
         check = false;
         errorsSubmit.file = "Vui lòng điền ava"
       }

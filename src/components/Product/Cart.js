@@ -14,12 +14,22 @@ class Cart extends Component {
         };
         this.listCart = this.listCart.bind(this)
         this.Sum = this.Sum.bind(this)
+        this.sumCart = this.sumCart.bind(this)
+    }
+    sumCart(value){
+        var {total} = this.state
+        console.log(value)
+        this.setState({
+            total: value
+        })
     }
     Sum(value) {
-        let { total } = this.state
+        let {carts} = this.state;
+        var { total } = this.state
         this.setState({
             total: total + value
         })
+        console.log("total",total)
     }
     componentDidMount() {
         const getLocal = localStorage.getItem("carts");
@@ -27,7 +37,7 @@ class Cart extends Component {
         let url = "http://localhost:8080/laravel/public/api/product/cart"
         axios.post(url, getcart)
             .then((res) => {
-                console.log(res.data.data)
+                //console.log(res.data.data)
                 if (res.data.errors) {
                     this.setState({
                         formErrors: res.data.errors,
@@ -39,75 +49,25 @@ class Cart extends Component {
                 }
             });
 
-        console.log(this.state.carts)
+        //console.log(this.state.carts)
     }
     listCart() {
-        let { carts } = this.state
-        let sum = 0
+        let { carts,total } = this.state
+        let sumCart = 0;
         if (carts.length > 0) {
             return carts.map((value, key) => {
-                let convertImages = JSON.parse(value["image"]);
-                console.log(convertImages)
+                //total += value["price"] * value["qty"]
+                sumCart += value["price"] * value["qty"];
+                //this.sumCart(sumCart)
+                //console.log(sumCart += value["price"] * value["qty"])
                 return <CartItem product={value} sum={this.Sum} />
-                // let convertImages = JSON.parse(value["image"]);
-                // sum = value["price"] * value["qty"];
-                // console.log(value)
-                // return (
-                //     <tbody>
-                //         <tr>
-                //           <td className="cart_product">
-                //             <a href>
-                //                 <img src={"http://localhost:8080/laravel/public/upload/product/"+value["id_user"] +"/" +convertImages[0]}
-                //                 style={{width:"100px",height:"70px"}}
-                //                 alt={value["name"]}/>
-                //             </a>
-                //           </td>
-                //           <td className="cart_description">
-                //             <p>{value["name"] }</p>
-                //             <p>Web ID: {value["wed_id"] }</p>
-                //           </td>
-                //           <td className="cart_price">
-                //             <p>${value["price"] }</p>
-                //           </td>
-                //           <td className="cart_quantity">
-                //             <div className="cart_quantity_button">
-                //                 {/* <button className="cart_quantity_up" onClick={()=> this.handleUP(value)}>
-                //                     +
-                //                 </button>
-                //                 <input
-                //                     className="cart_quantity_input"
-                //                     type="text"
-                //                     name="quantity"
-                //                     //defaultValue={1}
-                //                     value={value["qty"]}
-                //                     autoComplete="off"
-                //                     size={2}
-                //                 />
-                //                 <button className="cart_quantity_down" href>
-                //                     -
-                //                 </button> */}
-                //                 <UpanDown value={value} qty={value['qty']} id={value["id"]}/>
-                //             </div>
-                //           </td>
-                //           <td className="cart_total">
-                //             <p className="cart_total_price">${sum}</p>
-                //           </td>
-                //           <td className="cart_delete">
-                //             <a className="cart_quantity_delete" href>
-                //               <i className="fa fa-times" />
-                //             </a>
-                //           </td>
-                //         </tr>
-                //     </tbody>
-                // );
             }
             );
         }
-
     }
     //#do_action
     Checkout() {
-        let {total} = this.state
+        let {total,carts} = this.state
         return (
             <section id="do_action">
                 <div className="container">
@@ -218,14 +178,13 @@ class Cart extends Component {
                                         <tbody>
                                             {this.listCart()}
                                         </tbody>
-
-                                        {/* { console.log("cart",typeof carts,carts)} */}
                                     </table>
 
                                 </div>
                             </div>
                         </div>
                         <p>Tong tien: {total}</p>
+                        {this.Sum}
                     </div>
                 </section>
                 {this.Checkout()}

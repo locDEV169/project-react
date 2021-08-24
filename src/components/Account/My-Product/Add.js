@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import ReactDOM from 'react-dom';
 import FormErrors from '../../Error/formErrors';
 import axios from 'axios';
 import MenuLeft_Account from '../MenuLeft';
@@ -51,7 +50,7 @@ class Add extends Component{
     }
     Sale() {
         const { status } = this.state;
-        if (status == 0) {
+        if (status === 0) {
           return (
             <div style={{display:"inline-block"}}>
                 <input  id="productSale" type="text" name="sale" placeholder="0%" value={this.state.sale}  onChange={this.handleValue}
@@ -108,7 +107,7 @@ class Add extends Component{
         let check = true;
         let { category, brand, name, price,detail,company,files } = this.state;
         let errorsSubmit = this.state.formErrors;
-        if(name == ""){
+        if(name === ""){
             check = false;
             errorsSubmit.name = "Vui lòng nhập tên sản phẩm"
         }
@@ -116,7 +115,7 @@ class Add extends Component{
             check = true;
             errorsSubmit.name = ""
         }
-        if(price == ""){
+        if(price === ""){
             check = false;
             errorsSubmit.price = "Vui lòng nhập giá của sản phẩm"
         }
@@ -124,7 +123,7 @@ class Add extends Component{
             check = true
             errorsSubmit.price = ""
         }
-        if(category == ""){
+        if(category === ""){
             check = false;
             errorsSubmit.category = "Vui lòng chọn category của sản phẩm"
         }
@@ -132,7 +131,7 @@ class Add extends Component{
             check = true
             errorsSubmit.category = ""
         }
-        if(brand == ""){
+        if(brand === ""){
             check = false;
             errorsSubmit.brand = "Vui lòng chọn brand của sản phẩm"
         }
@@ -141,7 +140,7 @@ class Add extends Component{
             errorsSubmit.brand = ""
         }
         
-        if(company == ""){
+        if(company === ""){
             check = false;
             errorsSubmit.company = "Vui lòng chọn company của sản phẩm"
         }
@@ -149,7 +148,7 @@ class Add extends Component{
             check = true
             errorsSubmit.company = ""
         }
-        if(files == ''){
+        if(files === ''){
             check = false;
             errorsSubmit.files = "Vui lòng chọn images của sản phẩm"
         }
@@ -187,7 +186,7 @@ class Add extends Component{
            }
         }
 
-        if(detail == ""){
+        if(detail === ""){
             check = false;
             errorsSubmit.detail = "Vui lòng chọn detail của sản phẩm"
         }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MenuLeft from "./MenuLeft";
+//import MenuLeft from "./MenuLeft";
 import {withRouter} from 'react-router-dom'
 
 class App extends Component {

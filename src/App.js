@@ -1,14 +1,14 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 
 
 import Header from './components/Layout/Header'
-import Slider from './components/Layout/Slider'
+//import Slider from './components/Layout/Slider'
 import Footer from './components/Layout/Footer';
 import { Component } from 'react';
 import MenuLeft from './components/Layout/MenuLeft_Blog';
-import BlogPost from './components/Blog/BlogPost';
-import Pagination from './components/Layout/Pagination';
+//import BlogPost from './components/Blog/BlogPost';
+//import Pagination from './components/Layout/Pagination';
 
 class App extends Component{
   constructor(props){
