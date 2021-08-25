@@ -84,6 +84,7 @@ class ListProduct extends Component{
     ListProduct(){
         let {product} = this.state;
         console.log(this.state.product)
+        let sumCart = 0;
         if (product.length > 0){
             return product.map ((value,key) => {
                 //covert Image để hiển thị vì ảnh là file JSON

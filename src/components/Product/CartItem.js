@@ -4,7 +4,7 @@ const CartItem = (props) => {
     const { product } = props;
     const { sum } = props;
     const [quantity, setQuantity] = useState(product.qty)
-    //var total = 0;
+    var total = 0;
     console.log("price", product.price)
     //sum Price
     console.log(product.price)

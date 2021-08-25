@@ -7,29 +7,35 @@ import CartItem from './CartItem';
 class Cart extends Component {
     constructor(props) {
         super(props);
+        const getCart = JSON.parse(localStorage.getItem("totalCarts"));
         this.state = {
             carts: {},
             formErrors: {},
-            total: 0
+            total: getCart
         };
         this.listCart = this.listCart.bind(this)
         this.Sum = this.Sum.bind(this)
-        this.sumCart = this.sumCart.bind(this)
+
     }
-    sumCart(value){
-        var {total} = this.state
-        console.log(value)
-        this.setState({
-            total: value
-        })
-    }
+
     Sum(value) {
-        let {carts} = this.state;
-        var { total } = this.state
+        var { total } = this.state;
+        // const getCart = JSON.parse(localStorage.getItem("totalCarts"));
+        // console.log(total,getCart)
+        // this.setState({
+        //     total: getCart
+        // })
+        const getCart = JSON.parse(localStorage.getItem("totalCarts"));
+        let sumCart = getCart
+        console.log("sum1", value, getCart, sumCart, total)
+
+        //console.log("sum",value,getCart,sumCart,total)
         this.setState({
             total: total + value
         })
-        console.log("total",total)
+        localStorage.setItem("totalCarts", JSON.stringify(total))
+
+        console.log("sum2", value, getCart, sumCart, total)
     }
     componentDidMount() {
         const getLocal = localStorage.getItem("carts");
@@ -52,22 +58,23 @@ class Cart extends Component {
         //console.log(this.state.carts)
     }
     listCart() {
-        let { carts,total } = this.state
+        let { carts, total } = this.state
         let sumCart = 0;
         if (carts.length > 0) {
             return carts.map((value, key) => {
                 //total += value["price"] * value["qty"]
                 sumCart += value["price"] * value["qty"];
-                //this.sumCart(sumCart)
+                localStorage.setItem("totalCarts", JSON.stringify(sumCart))
+                //this.totalCart(sumCart)
                 //console.log(sumCart += value["price"] * value["qty"])
                 return <CartItem product={value} sum={this.Sum} />
-            }
-            );
+            });
         }
     }
     //#do_action
     Checkout() {
-        let {total,carts} = this.state
+        const getCart = JSON.parse(localStorage.getItem("totalCarts"));
+        let { total, carts } = this.state
         return (
             <section id="do_action">
                 <div className="container">
@@ -148,6 +155,8 @@ class Cart extends Component {
     }
     render() {
         let { carts, total } = this.state
+        const getCart = JSON.parse(localStorage.getItem("totalCarts"));
+        //console.log(total,getCart)
         return (
             <div>
                 <section id="cart_items">
@@ -179,12 +188,11 @@ class Cart extends Component {
                                             {this.listCart()}
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
+                            <p>Tong tien: {total}</p>
                         </div>
-                        <p>Tong tien: {total}</p>
-                        {this.Sum}
+                        {/* {this.Sum} */}
                     </div>
                 </section>
                 {this.Checkout()}
