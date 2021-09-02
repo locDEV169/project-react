@@ -9,13 +9,13 @@ class Cart extends Component {
         super(props);
         const getCart = JSON.parse(localStorage.getItem("totalCarts"));
         this.state = {
-            carts: {},
+            carts: [],
             formErrors: {},
             total: getCart
         };
         this.listCart = this.listCart.bind(this)
         this.Sum = this.Sum.bind(this)
-
+        this.removeCartItem = this.removeCartItem.bind(this)
     }
 
     Sum(value) {
@@ -36,6 +36,32 @@ class Cart extends Component {
         localStorage.setItem("totalCarts", JSON.stringify(total))
 
         console.log("sum2", value, getCart, sumCart, total)
+    }
+    removeCartItem(id) {
+        const { carts, total } = this.state
+        const cartsCopy = [...carts]
+        var objCarts = {};
+        console.log("id", id, "carts", carts, total)
+        //function để xóa
+        let index = this.state.carts.findIndex(item => item.id === id)
+        carts.map((v, k) => {
+            console.log(id,v['id'])
+            if (id == v['id']) {
+               this.setState({
+                   total : total - (v['qty'] * v['price'])
+               })
+            }
+        })
+        carts.splice(index, 1)
+        this.setState({
+            carts: carts
+        })
+        carts.map((v, k) => {
+            objCarts[v['id']] = v['qty']
+
+        })
+        localStorage.setItem("carts", JSON.stringify(objCarts))
+        console.log(carts, cartsCopy, objCarts)
     }
     componentDidMount() {
         const getLocal = localStorage.getItem("carts");
@@ -58,16 +84,73 @@ class Cart extends Component {
         //console.log(this.state.carts)
     }
     listCart() {
-        let { carts, total } = this.state
+        const { carts, total } = this.state
         let sumCart = 0;
         if (carts.length > 0) {
             return carts.map((value, key) => {
+                console.log(carts, value)
                 //total += value["price"] * value["qty"]
                 sumCart += value["price"] * value["qty"];
                 localStorage.setItem("totalCarts", JSON.stringify(sumCart))
-                //this.totalCart(sumCart)
-                //console.log(sumCart += value["price"] * value["qty"])
-                return <CartItem product={value} sum={this.Sum} />
+                //console.log(sfsumCart += a["price"] * value["qty"])
+                return <CartItem product={value} qty={value['qty']} sum={this.Sum} delete={this.removeCartItem} />
+            });
+        }
+    }
+    listItem() {
+        const { carts, total } = this.state
+        let sumCart = 0;
+        if (carts.length > 0) {
+            return carts.map((value, key) => {
+                console.log(carts, value)
+                sumCart += value["price"] * value["qty"];
+                localStorage.setItem("totalCarts", JSON.stringify(sumCart))
+                return <tr>
+                    <td className="cart_product">
+                        <a href>
+                            <img
+                                //src={"http://localhost:8080/laravel/public/upload/product/" + product.id_user + "/" + convertImages[0]}
+                                style={{ width: "70px", height: "70px" }}
+                                alt />
+                        </a>
+                    </td>
+                    <td className="cart_description">
+                        <p></p>
+                        <p>Web ID: </p>
+                    </td>
+                    <td className="cart_price">
+                        <p>$</p>
+                    </td>
+                    <td className="cart_quantity">
+                        <div className="cart_quantity_button">
+                            <a className="cart_quantity_up" onClick >
+                                +
+                            </a>
+                            <input
+                                className="cart_quantity_input"
+                                type="text"
+                                name="quantity"
+                                //defaultValue={1}
+                                value={2}
+                                autoComplete="off"
+                                size
+                                onChange
+                            />
+                            <a className="cart_quantity_down" onClick >
+                                -
+                            </a>
+                        </div>
+                    </td>
+                    <td className="cart_total">
+                        <p className="cart_total_price"></p>
+                    </td>
+                    <td className="cart_delete">
+                        <a className="cart_quantity_delete" onClick>
+                            {/* <a className="cart_quantity_delete" onClick={() => remove(product.id)}> */}
+                            <i className="fa fa-times" />
+                        </a>
+                    </td>
+                </tr>
             });
         }
     }
