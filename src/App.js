@@ -9,36 +9,51 @@ import { Component } from 'react';
 import MenuLeft from './components/Layout/MenuLeft_Blog';
 //import BlogPost from './components/Blog/BlogPost';
 //import Pagination from './components/Layout/Pagination';
-
-class App extends Component{
-  constructor(props){
+import { AppContext } from './Context/AppContext';
+class App extends Component {
+  constructor(props) {
     super(props)
     // create a variable count = 0,
-     
+    this.state = {
+      value: 2,
+    }
+    this.stateLoginContext = this.stateLoginContext.bind(this)
   }
-  render(){
+
+  stateLoginContext(check) {
+    let flag = check
+    //console.log("context Login in App",check,flag)
+    localStorage["isLogin"] = JSON.stringify(flag)
+  }
+
+  render() {
     return (
       <>
-      
-        <Header />
-        {/* <Slider /> */}
-        <section>
-          <div className="container">
-            <div className="row">
+        <AppContext.Provider
+          value={{
+            state: this.state,
+            loginContext: this.stateLoginContext,
+          }}>
+          <Header />
+          {/* <Slider /> */}
+          <section>
+            <div className="container">
+              <div className="row">
                 <div className="col-sm-3">
                   <MenuLeft />
                 </div>
-                {this.props.children} 
+                {this.props.children}
                 {/* gọi tới các prop con từ component con */}
-                
+
+              </div>
             </div>
-          </div>
-        </section>
-        <Footer />
+          </section>
+          <Footer />
+        </AppContext.Provider>
       </>
     );
   }
-  
+
 }
 
 export default App;

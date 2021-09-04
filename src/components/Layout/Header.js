@@ -7,13 +7,19 @@ import {
     Link,
     withRouter
 } from "react-router-dom";
+import { AppContext } from '../../Context/AppContext';
 class Header extends Component{
+
+    //call AppContext api 
+    static contextType = AppContext;
+
     constructor(props){
         super(props);
     }
     
     
     renderLogin(){
+        //console.log("header",this.context.loginContext())
         // xét thử đã login hay chưa
         const isLogin = localStorage.getItem('isLogin')
         // console.log(isLogin)
@@ -33,7 +39,7 @@ class Header extends Component{
         //set lại cho isLogin thành false
         localStorage.setItem("isLogin",JSON.stringify(false))
         this.props.history.push('/login');
-        localStorage.clear();
+        //localStorage.removeItem("isLogin");
         //dùng để quay lại location
         // window.location.href = '/';
     }
