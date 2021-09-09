@@ -26,8 +26,7 @@ class Cart extends Component {
         //     total: getCart
         // })
         const getCart = JSON.parse(localStorage.getItem("totalCarts"));
-        let sumCart = getCart
-        console.log("sum1", value, getCart, sumCart, total)
+        
 
         //console.log("sum",value,getCart,sumCart,total)
         this.setState({
@@ -35,7 +34,6 @@ class Cart extends Component {
         })
         localStorage.setItem("totalCarts", JSON.stringify(total))
 
-        console.log("sum2", value, getCart, sumCart, total)
     }
     removeCartItem(id) {
         const { carts, total } = this.state
