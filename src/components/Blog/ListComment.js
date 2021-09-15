@@ -14,7 +14,7 @@ class ListComment extends Component {
     reply(e) {
         let idSubComment = e.target.id;
         this.props.idSubComment(idSubComment);
-        console.log(idSubComment);
+        console.log("id sub cmt",idSubComment);
     }
     renderComment() {
         let comment = this.props.comment;
@@ -34,6 +34,7 @@ class ListComment extends Component {
                           value["image_user"]
                         }
                         alt=""
+                        style={{width:"100px"}}
                       />
                     </a>
                     <div className="media-body">

@@ -17,6 +17,7 @@ import {
 //import Home from './components/Home'
 import Login from './components/Member/login'
 import Blog from './components/Blog/Blog'
+import BlogHook from './components/Blog/BlogHook'
 import DetailBlog from './components/Blog/DetailBlog'
 import register from './components/Member/register'
 import ListProduct from './components/Product/ListProduct'
@@ -35,7 +36,7 @@ ReactDOM.render(
           <Route path='/login' component={Login} />
           <Route path='/register' component={register} />
 
-          <Route path='/blog/list' component={Blog} />
+          <Route path='/blog/list' component={BlogHook} />
           <Route path='/blog/detail/:id' component={DetailBlog} />
 
           <Route path='/product/home' component={ListProduct} />
